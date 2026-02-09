@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zerodha ONE - Smart Trading Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-container">
+        <!-- Left Panel - Branding & Graphics -->
+        <div class="login-left">
+            <div class="login-brand">
+                <div class="brand-logo-container">
+                    <div class="brand-icon">Z</div>
+                    <h1 class="brand-name">Zerodha <span>ONE</span></h1>
+                </div>
+                <p class="brand-description">Your gateway to smarter investing. Track, analyze, and grow your portfolio
+                    with AI-powered insights.</p>
+            </div>
+
+            <!-- Decorative Mini Charts -->
+            <div class="login-charts">
+                <div class="mini-stock-card">
+                    <div class="stock-header">
+                        <span class="stock-symbol">NIFTY 50</span>
+                        <span class="stock-change positive">+1.24%</span>
+                    </div>
+                    <svg class="mini-graph" viewBox="0 0 100 30">
+                        <polyline points="0,25 15,20 30,22 45,15 60,18 75,10 100,5" fill="none" stroke="#22C55E"
+                            stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="mini-stock-card">
+                    <div class="stock-header">
+                        <span class="stock-symbol">SENSEX</span>
+                        <span class="stock-change positive">+0.89%</span>
+                    </div>
+                    <svg class="mini-graph" viewBox="0 0 100 30">
+                        <polyline points="0,20 20,18 35,22 50,12 70,15 85,8 100,10" fill="none" stroke="#22C55E"
+                            stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="mini-stock-card">
+                    <div class="stock-header">
+                        <span class="stock-symbol">BANKNIFTY</span>
+                        <span class="stock-change negative">-0.32%</span>
+                    </div>
+                    <svg class="mini-graph" viewBox="0 0 100 30">
+                        <polyline points="0,10 20,12 40,8 55,15 70,18 85,20 100,22" fill="none" stroke="#EF4444"
+                            stroke-width="2" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="login-footer-left">
+                <p>Trusted by 10M+ investors across India</p>
+            </div>
+        </div>
+
+        <!-- Right Panel - Login Form -->
+        <div class="login-right">
+            <div class="login-form-wrapper">
+                <div class="login-header">
+                    <h2>Welcome back</h2>
+                    <p>Sign in to your account to continue</p>
+                </div>
+
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" placeholder="name@company.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        Sign in
+                    </button>
+
+                    <div class="login-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <div class="social-login">
+                        <button type="button" class="social-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="#4285F4"
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                <path fill="#34A853"
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                <path fill="#FBBC05"
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                <path fill="#EA4335"
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                            </svg>
+                            Google
+                        </button>
+                        <button type="button" class="social-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="#1877F2">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                            Facebook
+                        </button>
+                    </div>
+                </form>
+
+                <p class="login-demo">Demo: demo@tradelearn.com / password123</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard-container" style="display: none;">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h2>Zerodha ONE</h2>
+            </div>
+
+            <div class="nav-center">
+                <!-- Trading Mode Toggle in Navbar -->
+                <div class="nav-toggle-group">
+                    <button class="toggle-btn active" data-difficulty="easy">Easy</button>
+                    <button class="toggle-btn" data-difficulty="intermediate">Intermediate</button>
+                    <button class="toggle-btn" data-difficulty="expert">Expert</button>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#landing-cover" class="nav-link active" data-section="landing-cover">Home</a>
+                <a href="#hero" class="nav-link" data-section="hero">Dashboard</a>
+                <a href="#insights" class="nav-link" data-section="insights">Insights</a>
+                <a href="#learn" class="nav-link" data-section="learn">Learn</a>
+                <a href="#profile" class="nav-link" data-section="profile">Profile</a>
+
+                <!-- Algo Trading Button in Navbar -->
+                <button class="algo-trading-btn nav-algo-btn" id="algo-trading-btn">
+                    <span class="algo-icon"></span>
+                    <span class="algo-text">Automate</span>
+                </button>
+
+                <button id="logout-btn" class="nav-link logout">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Sidebar Open Button (shown when sidebar is collapsed) -->
+        <button class="sidebar-open-btn" id="sidebar-open-btn" title="Open Learning Hub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+
+        <!-- Learning Sidebar -->
+        <aside class="learning-sidebar" id="learning-sidebar">
+            <div class="sidebar-resize-handle" id="sidebar-resize-handle" title="Drag to resize"></div>
+            <div class="sidebar-header">
+                <h3>Learning Hub</h3>
+                <button class="sidebar-toggle" id="sidebar-toggle" title="Close sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="Search videos..." />
+            </div>
+
+            <div class="sidebar-content">
+                <div class="learning-item" data-video="intro-to-trading"
+                    data-url="https://zerodha.com/varsity/module/introduction-to-stock-markets/">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=300&h=200&fit=crop"
+                            alt="Trading Basics">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="learning-info">
+                        <h4>Trading Basics</h4>
+                        <p>5 min</p>
+                    </div>
+                </div>
+
+                <div class="learning-item" data-video="technical-analysis"
+                    data-url="https://zerodha.com/varsity/module/technical-analysis/">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=300&h=200&fit=crop"
+                            alt="Technical Analysis">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="learning-info">
+                        <h4>Technical Analysis</h4>
+                        <p>8 min</p>
+                    </div>
+                </div>
+
+                <div class="learning-item" data-video="fundamental-analysis"
+                    data-url="https://zerodha.com/varsity/module/fundamental-analysis/">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop"
+                            alt="Fundamental Analysis">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="learning-info">
+                        <h4>Fundamental Analysis</h4>
+                        <p>10 min</p>
+                    </div>
+                </div>
+
+                <div class="learning-item" data-video="risk-management"
+                    data-url="https://zerodha.com/varsity/module/risk-management/">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=300&h=200&fit=crop"
+                            alt="Risk Management">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="learning-info">
+                        <h4>Risk Management</h4>
+                        <p>6 min</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Video Popup -->
+        <div class="video-popup" id="video-popup">
+            <div class="video-popup-content">
+                <button class="close-popup" id="close-popup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="video-container">
+                    <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Landing Cover Section -->
+            <section id="landing-cover" class="snap-section landing-cover-section">
+                <div class="landing-bg-text">ONE</div>
+                <div class="landing-content">
+                    <h1 class="landing-title">ZERODHA</h1>
+                    <div class="landing-divider-line"></div>
+                    <p class="landing-subtitle">Next Generation Trading Platform</p>
+                </div>
+                <div class="landing-decoration deco-1"></div>
+                <div class="landing-decoration deco-2"></div>
+            </section>
+
+            <!-- Hero Section -->
+            <section id="hero" class="hero-section snap-section">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Welcome back,</span>
+                            <span class="title-line highlight">Trader</span>
+                        </h1>
+                        <p class="hero-subtitle">Track, analyze, and learn - all in one place</p>
+                    </div>
+                </div>
+
+                <!-- Trading Dashboard -->
+                <div class="trading-dashboard">
+                    <!-- Portfolio Button -->
+                    <div class="portfolio-trigger-section">
+                        <button class="portfolio-btn" id="portfolio-btn">
+                            <span class="portfolio-icon"></span>
+                            <span>View Portfolio</span>
+                            <span class="portfolio-badge">₹2.45L</span>
+                        </button>
+                    </div>
+
+                    <!-- Live Market View -->
+                    <div class="market-live-section">
+                        <div class="market-tabs">
+                            <button class="market-tab active" data-market="nifty50">NIFTY 50</button>
+                            <button class="market-tab" data-market="sensex">SENSEX</button>
+                            <button class="market-tab" data-market="gainers">Top Gainers</button>
+                            <button class="market-tab" data-market="losers">Top Losers</button>
+                        </div>
+
+                        <div class="market-content">
+                            <!-- Stock List -->
+                            <div class="stock-list" id="stock-list">
+                                <!-- Will be populated by JS -->
+                            </div>
+
+                            <!-- Market Chart -->
+                            <div class="market-chart-container">
+                                <div class="market-chart-header">
+                                    <div class="chart-title-group">
+                                        <h3 id="market-chart-title">NIFTY 50</h3>
+                                        <button class="chart-customize-btn" id="chart-customize-btn">
+                                            ⚙️ Customize
+                                        </button>
+                                    </div>
+                                    <div class="market-index-info">
+                                        <span class="index-value" id="index-value">22,456.80</span>
+                                        <span class="index-change positive" id="index-change">+156.45 (+0.70%)</span>
+                                    </div>
+                                </div>
+                                <div class="market-chart-canvas">
+                                    <canvas id="trading-chart"></canvas>
+                                </div>
+                                <!-- Company Details Panel -->
+                                <div class="company-details-panel" id="company-details">
+                                    <div class="company-header">
+                                        <h4 id="company-name">Reliance Industries</h4>
+                                        <span class="company-sector">Oil & Gas</span>
+                                    </div>
+                                    <div class="company-stats">
+                                        <div class="stat">
+                                            <span class="label">Open</span>
+                                            <span class="val" id="stat-open">₹2,845.00</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="label">High</span>
+                                            <span class="val" id="stat-high">₹2,878.50</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="label">Low</span>
+                                            <span class="val" id="stat-low">₹2,832.20</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="label">Volume</span>
+                                            <span class="val" id="stat-volume">12.5M</span>
+                                        </div>
+                                    </div>
+                                    <div class="company-patterns">
+                                        <h5>Recent Patterns</h5>
+                                        <div class="pattern-tags">
+                                            <span class="pattern-tag bullish">Bullish Engulfing</span>
+                                            <span class="pattern-tag neutral">Support at ₹2,820</span>
+                                            <span class="pattern-tag bullish">Above 50 DMA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Insights Section -->
+            <section id="insights" class="insights-section snap-section">
+                <div class="section-header">
+                    <h2>Market Insights</h2>
+                    <p>Swipe to explore the latest trends →</p>
+                </div>
+
+                <div class="insights-carousel-wrapper">
+                    <div class="insights-carousel" id="insights-carousel">
+                        <div class="insight-card featured">
+                            <div class="insight-category">Market News</div>
+                            <h3>NIFTY 50 hits new all-time high</h3>
+                            <p>The benchmark index crossed 22,000 mark for the first time, driven by strong banking and
+                                IT
+                                sector performance. Foreign institutional investors continue to show confidence.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">2 hours ago</span>
+                                <div class="insight-trend positive">+2.1%</div>
+                            </div>
+                            <div class="insight-visual">
+                                <svg viewBox="0 0 200 80" class="mini-chart">
+                                    <polyline
+                                        points="0,60 20,55 40,45 60,50 80,35 100,30 120,25 140,20 160,15 180,10 200,5"
+                                        fill="none" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-category">Trending</div>
+                            <h3>Tech stocks surge on AI optimism</h3>
+                            <p>Major tech companies rally as artificial intelligence investments show promising results.
+                                TCS
+                                and Infosys lead the charge with double-digit gains.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">5 hours ago</span>
+                                <div class="insight-trend positive">+5.8%</div>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-category">Sector Watch</div>
+                            <h3>Banking sector shows resilience</h3>
+                            <p>Despite global headwinds, Indian banking stocks maintain strong positions. HDFC Bank and
+                                ICICI Bank report robust quarterly earnings.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">1 day ago</span>
+                                <div class="insight-trend positive">+3.2%</div>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-category">Expert Opinion</div>
+                            <h3>EV sector gains momentum</h3>
+                            <p>Electric vehicle manufacturers see increased investor interest. Government incentives and
+                                rising fuel costs drive adoption across segments.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">1 day ago</span>
+                                <div class="insight-trend positive">+7.5%</div>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-category">Global Markets</div>
+                            <h3>US Fed hints at rate pause</h3>
+                            <p>Federal Reserve signals potential pause in interest rate hikes, boosting global market
+                                sentiment. Asian markets expected to benefit.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">2 days ago</span>
+                                <div class="insight-trend neutral">—</div>
+                            </div>
+                        </div>
+
+                        <div class="insight-card">
+                            <div class="insight-category">Commodity</div>
+                            <h3>Gold prices stabilize</h3>
+                            <p>Precious metals find support as geopolitical tensions ease. Silver shows strong recovery
+                                after recent correction.</p>
+                            <div class="insight-footer">
+                                <span class="insight-time">3 days ago</span>
+                                <div class="insight-trend positive">+1.8%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section id="learn" class="learn-section snap-section">
+        <div class="section-header">
+            <h2>Learning Resources</h2>
+            <p>Enhance your trading knowledge</p>
+        </div>
+
+        <div class="learning-modules">
+            <div class="module-card">
+                <div class="module-icon">📊</div>
+                <h3>Stock Market Basics</h3>
+                <p>Understanding stocks, shares, and how markets work</p>
+                <a href="https://zerodha.com/varsity/module/introduction-to-stock-markets/" target="_blank"
+                    class="module-link">Start Learning →</a>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">📈</div>
+                <h3>Technical Analysis</h3>
+                <p>Chart patterns, indicators, and trading strategies</p>
+                <a href="https://zerodha.com/varsity/module/technical-analysis/" target="_blank"
+                    class="module-link">Start Learning →</a>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">💼</div>
+                <h3>Fundamental Analysis</h3>
+                <p>Financial statements, ratios, and company valuation</p>
+                <a href="https://zerodha.com/varsity/module/fundamental-analysis/" target="_blank"
+                    class="module-link">Start Learning →</a>
+            </div>
+
+            <div class="module-card">
+                <div class="module-icon">🎯</div>
+                <h3>Risk Management</h3>
+                <p>Portfolio diversification and risk mitigation</p>
+                <a href="https://zerodha.com/varsity/module/risk-management/" target="_blank" class="module-link">Start
+                    Learning →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Streak Section -->
+    <section id="streak" class="streak-section snap-section">
+        <div class="streak-content">
+            <div class="streak-icon-large">🔥</div>
+            <h2>You're on fire!</h2>
+            <p class="streak-count">7 Day Streak</p>
+            <p class="streak-message">Keep learning to maintain your momentum.</p>
+            <div class="streak-calendar">
+                <div class="streak-day active">M</div>
+                <div class="streak-day active">T</div>
+                <div class="streak-day active">W</div>
+                <div class="streak-day active">T</div>
+                <div class="streak-day active">F</div>
+                <div class="streak-day">S</div>
+                <div class="streak-day">S</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-demo-details">
+                <p>Demo Account: active</p>
+                <p>Version: 2.4.0</p>
+                <p>&copy; 2026 Zerodha One. All rights reserved.</p>
+            </div>
+        </footer>
+    </section>
+    </main>
+    </div>
+
+    <!-- Portfolio Modal -->
+    <div class="portfolio-modal-overlay" id="portfolio-modal-overlay">
+        <div class="portfolio-modal">
+            <div class="portfolio-modal-header">
+                <h2>📊 Combined Portfolio</h2>
+                <button class="portfolio-modal-close" id="portfolio-modal-close">&times;</button>
+            </div>
+
+            <div class="portfolio-modal-body">
+                <!-- Portfolio Summary -->
+                <div class="portfolio-summary">
+                    <div class="summary-main">
+                        <span class="summary-label">Total Value</span>
+                        <span class="summary-value">₹2,45,890</span>
+                        <span class="summary-change positive">+₹28,450 (+12.5%)</span>
+                    </div>
+                    <div class="summary-stats">
+                        <div class="summary-stat">
+                            <span class="stat-label">Invested</span>
+                            <span class="stat-value">₹2,17,440</span>
+                        </div>
+                        <div class="summary-stat">
+                            <span class="stat-label">Day's P&L</span>
+                            <span class="stat-value positive">+₹3,245</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zerodha Products -->
+                <div class="portfolio-products">
+                    <div class="product-card clickable" data-product="kite">
+                        <div class="product-header">
+                            <span class="product-icon">📈</span>
+                            <span class="product-name">Kite</span>
+                            <span class="product-arrow">→</span>
+                        </div>
+                        <div class="product-value">₹1,45,230</div>
+                        <div class="product-change positive">+8.2%</div>
+                        <div class="product-detail">Stocks & F&O</div>
+                    </div>
+                    <div class="product-card clickable" data-product="coin">
+                        <div class="product-header">
+                            <span class="product-icon">🪙</span>
+                            <span class="product-name">Coin</span>
+                            <span class="product-arrow">→</span>
+                        </div>
+                        <div class="product-value">₹65,420</div>
+                        <div class="product-change positive">+15.3%</div>
+                        <div class="product-detail">Mutual Funds</div>
+                    </div>
+                    <div class="product-card clickable" data-product="console">
+                        <div class="product-header">
+                            <span class="product-icon">💵</span>
+                            <span class="product-name">Console</span>
+                            <span class="product-arrow">→</span>
+                        </div>
+                        <div class="product-value">₹25,000</div>
+                        <div class="product-change positive">+4.1%</div>
+                        <div class="product-detail">Bonds & FDs</div>
+                    </div>
+                    <div class="product-card clickable" data-product="funds">
+                        <div class="product-header">
+                            <span class="product-icon">🏦</span>
+                            <span class="product-name">Funds</span>
+                            <span class="product-arrow">→</span>
+                        </div>
+                        <div class="product-value">₹10,240</div>
+                        <div class="product-change neutral">Available</div>
+                        <div class="product-detail">Free Cash</div>
+                    </div>
+                </div>
+
+                <!-- Holdings Section (hidden by default, shown on product click) -->
+                <div class="portfolio-holdings" id="portfolio-holdings" style="display: none;">
+                    <div class="holdings-back" id="holdings-back">← Back to Products</div>
+                    <h4 id="holdings-title">Kite Holdings</h4>
+                    <div class="holdings-list" id="holdings-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Algo Trading Modal -->
+    <div class="algo-modal-overlay" id="algo-modal-overlay">
+        <div class="algo-modal">
+            <div class="algo-modal-header">
+                <div class="header-title-group">
+                    <h2>🤖 Automated Trading Setup</h2>
+                    <button class="info-icon-btn" id="algo-info-btn" title="More Info">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </button>
+                    <!-- Info Popup -->
+                    <div class="info-popup" id="algo-info-popup">
+                        <h3>How This Works (Demo vs Production)</h3>
+
+                        <div class="info-section">
+                            <h4>Current Demo Mode</h4>
+                            <ul>
+                                <li>Gateway runs on a local server (localhost).</li>
+                                <li>Token is generated from the local backend.</li>
+                                <li>Used only for testing and presentation.</li>
+                            </ul>
+                        </div>
+
+                        <div class="info-section">
+                            <h4>Production Deployment</h4>
+                            <ul>
+                                <li>Gateway will be hosted on cloud (AWS/GCP/Azure).</li>
+                                <li>Fixed IP and load balancer enabled.</li>
+                                <li>High availability and security monitoring.</li>
+                                <li>Scales automatically with users.</li>
+                                <li>Users connect only to the gateway, so no personal static IP is required.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="algo-modal-close" id="algo-modal-close">&times;</button>
+            </div>
+
+            <div class="algo-modal-body">
+                <!-- Progress Steps -->
+                <div class="algo-steps">
+                    <div class="algo-step" data-step="1">
+                        <div class="step-indicator">
+                            <span class="step-number">1</span>
+                            <span class="step-check">✓</span>
+                        </div>
+                        <div class="step-content">
+                            <h4>Generate API Token</h4>
+                            <p>Create a secure token for authentication</p>
+                        </div>
+                    </div>
+                    <div class="algo-step" data-step="2">
+                        <div class="step-indicator">
+                            <span class="step-number">2</span>
+                            <span class="step-check">✓</span>
+                        </div>
+                        <div class="step-content">
+                            <h4>Authorize AI Agent</h4>
+                            <p>Grant trading permissions to the agent</p>
+                        </div>
+                    </div>
+                    <div class="algo-step" data-step="3">
+                        <div class="step-indicator">
+                            <span class="step-number">3</span>
+                            <span class="step-check">✓</span>
+                        </div>
+                        <div class="step-content">
+                            <h4>Connect to Gateway</h4>
+                            <p>Establish connection to trading server</p>
+                        </div>
+                    </div>
+                    <div class="algo-step" data-step="4">
+                        <div class="step-indicator">
+                            <span class="step-number">4</span>
+                            <span class="step-check">✓</span>
+                        </div>
+                        <div class="step-content">
+                            <h4>Start Automation</h4>
+                            <p>Begin automated trading operations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="algo-progress">
+                    <div class="progress-bar" id="algo-progress-bar"></div>
+                </div>
+
+                <!-- Action Section -->
+                <div class="algo-actions">
+                    <div class="algo-message" id="algo-message"></div>
+
+                    <button class="algo-action-btn primary" id="algo-generate-btn">
+                        <span class="btn-icon">🔑</span>
+                        Generate Token
+                    </button>
+
+                    <div class="algo-token-display" id="algo-token-display" style="display: none;">
+                        <div class="token-box">
+                            <code id="algo-token-value">...</code>
+                            <button class="copy-token-btn" id="copy-token-btn" title="Copy Token">
+                                📋
+                            </button>
+                        </div>
+                        <p class="token-success">✓ Token generated successfully. You can now connect AI agents.</p>
+                    </div>
+
+                    <button class="algo-action-btn danger" id="algo-disable-btn" style="display: none;">
+                        <span class="btn-icon">⛔</span>
+                        Disable Automation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Support Chatbot -->
+    <button class="chatbot-toggle" id="chatbot-toggle" title="Support Assistant">
+        <span class="toggle-icon">💬</span>
+    </button>
+
+    <div class="chatbot-widget" id="chatbot-widget">
+        <div class="chat-header">
+            <div class="header-info">
+                <h3>Zerodha Support <span id="levelBadge" class="user-level-badge level-beginner">Beginner</span></h3>
+                <div class="status-indicator">● Online - AI Assistant</div>
+            </div>
+            <button class="chat-close" id="chat-close">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-area">
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="How can I help you?">
+                <button class="send-btn" id="sendBtn">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zerodha Support Assistant</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* MAIN WIDGET */
+
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            height: 650px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+
+        .chat-header {
+            background: linear-gradient(135deg, #387ed1, #2563eb);
+            color: white;
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-level-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .level-beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        /* MESSAGES */
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .bot-avatar {
+            width: 32px;
+            height: 32px;
+            background: #387ed1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .message-content {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: #387ed1;
+            color: white;
+        }
+
+        .message-content b {
+            color: #2563eb;
+        }
+
+        /* SUGGESTIONS */
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-left: 42px;
+            margin-bottom: 10px;
+        }
+
+        .suggestion-btn {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .suggestion-btn:hover {
+            border-color: #387ed1;
+            color: #387ed1;
+        }
+
+        /* INPUT */
+
+        .chat-input-area {
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 24px;
+            outline: none;
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            background: #387ed1;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ANIMATION */
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-widget">
+
+        <div class="chat-header">
+            <div>
+                <h3>
+                    Zerodha Support
+                    <span class="user-level-badge level-beginner">Beginner</span>
+                </h3>
+                <div style="font-size:11px;opacity:.8;">● Online Support</div>
+            </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-input-area">
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your question...">
+                <button class="send-btn" id="sendBtn">➤</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        /* ---------------- DATA ---------------- */
+
+        const knowledgeBase = {
+
+            account: {
+                keywords: ['account', 'kyc', 'login', 'reactivate', 'freeze'],
+                solutions: {
+                    kyc: 'KYC verification takes **up to 72 hours**.',
+                    reactivate: 'Reactivate at **signup.zerodha.com/rekyc**.',
+                    freeze: 'Email **stoptrade@zerodha.com** to freeze immediately.'
+                },
+                suggestions: ['Check KYC', 'Reactivate Account', 'Freeze Account']
+            },
+
+            trading: {
+                keywords: ['trade', 'order', 'margin', 'gtt', 'reject'],
+                solutions: {
+                    rejected: 'Order rejected due to **margin/circuit limit/time**.',
+                    margin: 'Use Zerodha Margin Calculator.',
+                    gtt: 'GTT valid for **365 days**.'
+                },
+                suggestions: ['Order Rejected', 'Margin Help', 'GTT Info']
+            },
+
+            funds: {
+                keywords: ['fund', 'money', 'withdraw', 'upi', 'deposit'],
+                solutions: {
+                    withdraw: 'Withdrawals reach bank in **24 hours**.',
+                    upi: 'UPI limit is **₹5 Lakh/day**.'
+                },
+                suggestions: ['Withdraw Status', 'UPI Help']
+            }
+
+        };
+
+
+        /* ---------------- STATE ---------------- */
+
+        const botState = {
+            isTyping: false,
+            usedSuggestions: new Set(),
+            resolvedTopics: new Set(),   // 👈 NEW
+            humanMode: false
+        };
+
+
+        /* ---------------- CORE ---------------- */
+
+        function findResponse(input) {
+
+            const q = input.toLowerCase();
+
+            for (const cat in knowledgeBase) {
+
+                const data = knowledgeBase[cat];
+
+                if (data.keywords.some(k => q.includes(k))) {
+
+                    for (const key in data.solutions) {
+
+                        if (q.includes(key)) {
+
+                            // Mark this topic as resolved
+                            botState.resolvedTopics.add(`${cat}-${key}`);
+
+                            return {
+                                text: data.solutions[key],
+                                category: cat,
+                                key: key
+                            };
+                        }
+                    }
+
+                    return {
+                        text: `I can help with ${cat} queries. What specifically do you need?`,
+                        category: cat,
+                        general: true
+                    };
+                }
+            }
+
+            return null;
+        }
+
+
+        /* ---------------- UI ---------------- */
+
+        function appendMessage(role, text, suggestions = []) {
+
+            const container = document.getElementById('chatMessages');
+
+            const wrap = document.createElement('div');
+            wrap.className = `message ${role}`;
+
+            const formatted = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+            wrap.innerHTML = `
+        ${role === 'bot' ? '<div class="bot-avatar">👨‍💻</div>' : ''}
+        <div class="message-content">${formatted}</div>
+    `;
+
+            container.appendChild(wrap);
+
+
+            // Filter used suggestions
+            const filtered = suggestions.filter(s =>
+                !botState.usedSuggestions.has(s)
+            );
+
+            if (filtered.length) {
+
+                const div = document.createElement('div');
+                div.className = 'suggestions';
+
+                filtered.forEach(s => {
+
+                    const btn = document.createElement('button');
+                    btn.className = 'suggestion-btn';
+                    btn.innerText = s;
+
+                    btn.onclick = () => {
+                        botState.usedSuggestions.add(s);
+                        chatInput.value = s;
+                        handleSend();
+                    };
+
+                    div.appendChild(btn);
+                });
+
+                container.appendChild(div);
+            }
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+
+        /* ---------------- FEEDBACK ---------------- */
+
+        function showFeedback() {
+
+            if (botState.humanMode) return;
+
+            const container = document.getElementById('chatMessages');
+
+            const div = document.createElement('div');
+            div.className = 'suggestions';
+
+            const yes = document.createElement('button');
+            yes.className = 'suggestion-btn';
+            yes.innerText = '✅ Yes, solved';
+
+            const no = document.createElement('button');
+            no.className = 'suggestion-btn';
+            no.innerText = '❌ Need Human Help';
+
+            yes.onclick = () => {
+                appendMessage('bot',
+                    "Happy to help 😊 Let me know if you need anything else.");
+            };
+
+            no.onclick = () => {
+                connectHumanAgent();
+            };
+
+            div.appendChild(yes);
+            div.appendChild(no);
+
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+
+        /* ---------------- HUMAN AGENT ---------------- */
+
+        function connectHumanAgent() {
+
+            botState.humanMode = true;
+
+            appendMessage('bot',
+                "⏳ Connecting you to a human support agent...");
+
+            setTimeout(() => {
+
+                appendMessage('bot',
+                    "👋 Hi, I'm **Rahul**, your Zerodha support executive.\n\nI've reviewed your issue and I'm here to help you personally. Please tell me what went wrong.");
+
+            }, 2000);
+        }
+
+
+        /* ---------------- MAIN ---------------- */
+
+        async function handleSend() {
+
+            if (botState.isTyping) return;
+
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            appendMessage('user', text);
+            input.value = '';
+
+            botState.isTyping = true;
+
+            await new Promise(r => setTimeout(r, 700));
+
+
+            if (botState.humanMode) {
+
+                appendMessage('bot',
+                    "Thank you for explaining. I'm checking this for you right now. Please give me a moment 🙏");
+
+                botState.isTyping = false;
+                return;
+            }
+
+
+            const response = findResponse(text);
+
+            if (response) {
+
+                let suggestions = [];
+
+                // Only show unresolved suggestions
+                if (response.general) {
+
+                    const all = knowledgeBase[response.category].suggestions;
+
+                    suggestions = all.filter(s => {
+
+                        const key = s.toLowerCase().split(' ')[0];
+
+                        return !botState.resolvedTopics.has(
+                            `${response.category}-${key}`
+                        );
+                    });
+                }
+
+                appendMessage('bot', response.text, suggestions);
+
+                setTimeout(showFeedback, 400);
+            }
+            else {
+
+                appendMessage('bot',
+                    "I'm not fully sure. Could you explain a bit more?",
+                    ['Account', 'Trading', 'Funds']
+                );
+            }
+
+            botState.isTyping = false;
+        }
+
+
+        /* ---------------- INIT ---------------- */
+
+        sendBtn.onclick = handleSend;
+
+        chatInput.onkeypress = (e) => {
+            if (e.key === 'Enter') handleSend();
+        };
+
+        window.onload = () => {
+            appendMessage('bot',
+                "Hi 👋 I'm your Zerodha virtual assistant. How can I help you today?");
+        };
+
+    </script>
+
+</body>
+
+</html>
